@@ -1,6 +1,6 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, Fragment } from 'react';
 import { View, Text, StyleSheet, Image, TouchableWithoutFeedback, Keyboard } from 'react-native';
-import { Title, HelperText } from 'react-native-paper';
+import { Title, HelperText, Divider } from 'react-native-paper';
 import FormInput from '../util/FormInput.js';
 import FormButton from '../util/FormButton.js';
 import { AuthContext } from '../../navigation/AuthProvider.js';
@@ -10,9 +10,9 @@ import useStatusBar from '../util/useStatusBar.js';
 //import console = require('console');
 //import console = require('console');
 
-function LoginScreen({ navigation }) {
+function ForgotPassword({ navigation }) {
   useStatusBar('dark-content');
-  const { login, errors} = useContext(AuthContext);
+  const { passwordReset, errors, passwordEmailSent} = useContext(AuthContext);
   const [exa, setExa] = useState(1);
   // const [firebaseErrors, setFirebaseErrors]= useState({})
   // console.log('namaste', errors.loginError);
@@ -27,16 +27,16 @@ function LoginScreen({ navigation }) {
    },[]) */
   //console.log(email, password)
   const handleLogin = () => {
-    let tempPasswordError = ''; let tempEmailError = '';
+     let tempEmailError = '';
     var regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    if (password === '') { tempPasswordError = 'Password cannot be empty' } else { }
+  //  if (password === '') { tempPasswordError = 'Password cannot be empty' } else { }
     if (email === '') { tempEmailError = 'Email cannot be empty' }
     else if (!regex.test(email)) {
       tempEmailError = 'Please enter valid email'
     }
-    setLocalErrors({ password: tempPasswordError, email: tempEmailError })
+    setLocalErrors({ email: tempEmailError })
 
-    if (tempEmailError === '' && tempPasswordError === '') { login(email, password) }
+    if (tempEmailError === '') { passwordReset(email) }
     else {
       console.log('else nadustundi')
     }
@@ -45,8 +45,8 @@ function LoginScreen({ navigation }) {
     <TouchableWithoutFeedback onPress={() => { Keyboard.dismiss() }}>
       <View style={styles.container}>
         <Image source={require('../../../assets/milan_logo.png')} style={styles.logo} />
-        <Title style={styles.titleText}>Welcome to Milan Laser App</Title>
-        <FormInput
+        <Title style={styles.titleText}>Forgot Password</Title>
+       {!passwordEmailSent ? <Fragment><FormInput
           labelName='Email'
           value={email}
           autoCapitalize='none'
@@ -54,37 +54,25 @@ function LoginScreen({ navigation }) {
           keyboardType='email-address'
         />
         <HelperText type="error" visible={localErrors.email !== ''}>{localErrors.email}</HelperText>
-        <FormInput
-          labelName='Password'
-          value={password}
-          autoCapitalize='none'
-          secureTextEntry={true}
-          onChangeText={userPassword => setPassword(userPassword)}
-        />
-        <HelperText type="error" visible={localErrors.password !== ''}>{localErrors.password}</HelperText>
-        <View style={{ marginVertical: 5 }}>{errors.loginError.code === 'auth/user-not-found' ? <Text style={{ fontSize: 16, color: 'red' }}>User not found</Text> : (errors.loginError.code === 'auth/wrong-password') ? <Text style={{ fontSize: 16, color: 'red' }}>Wrong password</Text> : null}</View>
+     
+        <View style={{ marginVertical: 15 }}>{errors.passwordReset.code === 'auth/user-not-found' ? <Text style={{ fontSize: 16, color: 'red' }}>User not found</Text> :  null}</View>
         <FormButton
-          title='Login'
+          title='Submit'
           modeValue='contained'
           labelStyle={styles.loginButtonLabel}
           contentStyle={{ backgroundColor: '#01718f', minWidth: 180 }}
           onPress={handleLogin}
-        />
+/></Fragment> : <View style={{margin:15}}>
+<Text style={{fontSize:16, color:'#01718f'}}>A link to reset your password has been sent to your email. Please visit that link and reset your password</Text>
+<Divider style={{marginVertical:15}}/>
+</View> }
         <FormButton
-          title='New user? Join here'
+          title='Login?'
           modeValue='text'
           uppercase={false}
           contentStyle={{ minWidth: 180 }}
           labelStyle={styles.navButtonText}
-          onPress={() => { navigation.navigate('Signup') }}
-        />
-        <FormButton
-          title='Forgot Password? Click here'
-          modeValue='text'
-          uppercase={false}
-          contentStyle={{ minWidth: 180 }}
-          labelStyle={styles.navButtonText}
-          onPress={() => { navigation.navigate('ForgotPassword') }}
+          onPress={() => { navigation.navigate('Login') }}
         />
       </View>
     </TouchableWithoutFeedback>
@@ -93,7 +81,7 @@ function LoginScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#f5f5f5',
-    marginTop:55,
+    marginTop: 55,
     justifyContent: 'center',
     alignItems: 'center'
   },
@@ -113,8 +101,6 @@ const styles = StyleSheet.create({
   logo: {
     width: 180,
     height: 70,
-   
-
   }
 })
-export default LoginScreen
+export default ForgotPassword

@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { View, StyleSheet, Image, Text } from 'react-native';
+import { View, StyleSheet, Image, Text, TouchableWithoutFeedback,ScrollView, Keyboard, KeyboardAvoidingView} from 'react-native';
 import { Title, IconButton, HelperText } from 'react-native-paper';
 import FormInput from '../util/FormInput.js';
 import FormButton from '../util/FormButton.js';
@@ -29,14 +29,18 @@ import {logo} from '../../../assets/milan_logo.png';
 
   }
     return (
-      <View style={styles.container}>
+<KeyboardAvoidingView>
+      <TouchableWithoutFeedback onPress={() => { Keyboard.dismiss() }}>
+      <View style={styles.container}>   
       <Image source={require('../../../assets/milan_logo.png')} style={styles.logo}/>
         <Title style={styles.titleText}>Register you Account</Title>
-        <FormInput
+         
+       <FormInput
           labelName='Email'
           value={email}
           autoCapitalize='none'
           onChangeText={userEmail => setEmail(userEmail)}
+          keyboardType='email-address'
         />
         <HelperText type="error" visible={localErrors.email!==''}>{localErrors.email}</HelperText>
         <FormInput
@@ -54,7 +58,7 @@ import {logo} from '../../../assets/milan_logo.png';
         />
         <HelperText type="error" visible={localErrors.confirmPassword!==''}>{localErrors.confirmPassword
         }</HelperText>
-    <View style={{ marginVertical: 15 }}>{errors.signupError.code === 'auth/email-already-in-use' ? <Text style={{ fontSize: 16, color: 'red' }}>Email already has a account</Text> : (errors.loginError.code === 'auth/wrong-password') ? <Text style={{ fontSize: 16, color: 'red' }}>Wrong password</Text> : null}</View>
+    <View style={{ marginVertical: 5 }}>{errors.signupError.code === 'auth/email-already-in-use' ? <Text style={{ fontSize: 16, color: 'red' }}>Email already has a account</Text> : (errors.loginError.code === 'auth/wrong-password') ? <Text style={{ fontSize: 16, color: 'red' }}>Wrong password</Text> : null}</View>
 
      <View style={{marginTop:25}}><FormButton
           title='Signup'
@@ -70,19 +74,24 @@ import {logo} from '../../../assets/milan_logo.png';
          // color='#01718f'
           onPress={() => navigation.goBack()}
         />
+        
       </View>
+      
+      </TouchableWithoutFeedback>
+      </KeyboardAvoidingView>
     );
   }
   const styles = StyleSheet.create({
     container: {
       backgroundColor: '#f5f5f5',
-      flex: 1,
       justifyContent: 'center',
-      alignItems: 'center'
+      alignItems: 'center',
+      marginTop:55
     },
     titleText: {
-      fontSize: 24,
-      marginBottom: 10
+      fontSize: 20,
+      marginBottom: 10,
+      marginTop:25
     },
     loginButtonLabel: {
       fontSize: 22
@@ -96,8 +105,6 @@ import {logo} from '../../../assets/milan_logo.png';
     logo: {
       width:180,
       height:70,
-      position: 'absolute',
-      top: '15%'
     }
   });
  

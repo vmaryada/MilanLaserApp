@@ -4,7 +4,8 @@ import * as firebase from 'firebase';
 export const AuthContext = createContext({});
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
-    const [errors, setErrors]= useState({loginError:{code:"", message:""}, signupError:{code:"", message:""}});
+    const [passwordEmailSent, setPasswordEmailSent] = useState(false);
+    const [errors, setErrors]= useState({loginError:{code:"", message:""}, signupError:{code:"", message:""}, passwordReset:{code:"", message:""}});
     console.log(errors);
     return (
       <AuthContext.Provider
@@ -28,15 +29,22 @@ export const AuthProvider = ({ children }) => {
               setErrors({...errors, signupError: {code:e.toJSON().code, message:e.toJSON().message}});
             }
           },
+          passwordReset: (email) => {
+            firebase.auth().sendPasswordResetEmail(email).then(function() {
+              setPasswordEmailSent(true);
+            }).catch(function(e) {
+              setErrors({...errors, passwordReset: {code:e.toJSON().code, message:e.toJSON().message}});
+            });
+          },
           logout: async () => {
             try {
               await firebase.auth().signOut();
             } catch (e) {
               console.error(e);
             }
-          },errors,
+          },errors, passwordEmailSent,
           clearErrors: () => {
-            setErrors({loginError:{code:"", message:""}, signupError: {code:"", message:""}});
+            setErrors({loginError:{code:"", message:""}, signupError: {code:"", message:""}, passwordReset: {code:"", message:""}});
           }
         }}
       >

@@ -62,22 +62,22 @@ function QuoteCalculator({ navigation }) {
       <RadioButton.Group
         onValueChange={value => setState({ ...state, mode: value })}
         value={state.mode}>
-        <RadioButton.Item label="Monthly Special" value="monthly special" />
-        <RadioButton.Item label="Previous Treatments" value="previous treatments" />
-        <RadioButton.Item label="Discount Code" value="discount code" />
+        <RadioButton.Item color='#01718f' label="Monthly Special" value="monthly special" />
+        <RadioButton.Item color='#01718f' label="Previous Treatments" value="previous treatments" />
+        <RadioButton.Item color='#01718f' label="Discount Code" value="discount code" />
       </RadioButton.Group>
       <Divider />
       {state.mode == 'discount code' ? <View><RadioButton.Group
         onValueChange={value => setState({ ...state, disc_code: value })}
         value={state.disc_code}>
-        <RadioButton.Item label="PS250" value={250} />
-        <RadioButton.Item label="PS500" value={500} />
+        <RadioButton.Item color='#01718f' label="PS250" value={250} />
+        <RadioButton.Item color='#01718f' label="PS500" value={500} />
       </RadioButton.Group><Divider /></View> : <View></View>}
       <RadioButton.Group
         onValueChange={value => setState({ ...state, months: value })}
         value={state.months}>
-        <RadioButton.Item label="36 Month Financing" value={36} />
-        <RadioButton.Item label="24 Month Financing" value={24} />
+        <RadioButton.Item color='#01718f' label="36 Month Financing" value={36} />
+        <RadioButton.Item color='#01718f' label="24 Month Financing" value={24} />
       </RadioButton.Group>
       
       </View>

@@ -4,7 +4,7 @@ import { TextInput, Divider, IconButton } from 'react-native-paper';
 
 
 import AreaButton from '../util/AreaButton';
-import { Dropdown } from 'react-native-material-dropdown';
+import { Dropdown } from 'react-native-material-dropdown-v2';
 //import console = require('console');
 //import console = require('console');
 //simport { set } from 'react-native-reanimated';
@@ -223,7 +223,7 @@ function StoreRankCalculator({ navigation }) {
                 </View>
             </ScrollView></KeyboardAvoidingView> : null}
         {showFinal ? <ScrollView><View style={{ alignItems: 'center', marginTop: 15 }}>
-            <Text style={{ fontSize: 30, color: '#01718f' }}>Upsell Total: {upsellObject.value}</Text>
+            <Text style={{ fontSize: 30, color: '#01718f' }}>Upsell Total: ${upsellObject.value}</Text>
             <View style={{ width: '50%', margin: 15 }}><Divider /></View>
             <View style={{ flexDirection: 'row', marginTop: 10, width: '95%' }}>
                 <View style={{ width: '50%', alignItems: 'center', borderRightWidth: 1 }}><Text style={{ fontSize: 19, margin: 5, color: '#01718f', fontWeight: '600' }}>Review Goals Met</Text></View>
