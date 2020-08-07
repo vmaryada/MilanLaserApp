@@ -5,11 +5,6 @@ import { TextInput, Divider, IconButton } from 'react-native-paper';
 
 import AreaButton from '../util/AreaButton';
 import { Dropdown } from 'react-native-material-dropdown-v2';
-//import console = require('console');
-//import console = require('console');
-//simport { set } from 'react-native-reanimated';
-//import { ifError } from 'assert';
-//import console = require('console');
 
 function StoreRankCalculator({ navigation }) {
 
@@ -66,7 +61,7 @@ function StoreRankCalculator({ navigation }) {
         return result === undefined ? false : true
     }
     const handleAdminFocus = (name) => {
-        console.log('handle admin focus')
+        //  console.log('handle admin focus')
 
         setAdminsObject({ ...adminsObject, [name]: { value: adminsObject[name].value, focussed: true } })
     }
@@ -74,8 +69,9 @@ function StoreRankCalculator({ navigation }) {
         setAdminsObject({ ...adminsObject, [name]: { value: adminsObject[name].value, focussed: false } })
     }
     const handleAdminChange = (name, text) => {
-        //   console.log(name, text);
-        setAdminsObject({ ...adminsObject, [name]: { ...adminsObject[name], value: parseInt(text) } })
+        //console.log(''.toString());
+        (text.charCodeAt(0) > 47 && text.charCodeAt(0) < 58) ?
+            setAdminsObject({ ...adminsObject, [name]: { ...adminsObject[name], value: parseInt(text) } }) : text === '' ? setAdminsObject({ ...adminsObject, [name]: { ...adminsObject[name], value: text } }) : null
     }
     const handleProviderFocus = (name) => {
         setProvidersObject({ ...providersObject, [name]: { ...providersObject[name], focussed: true } })
@@ -84,8 +80,8 @@ function StoreRankCalculator({ navigation }) {
         setProvidersObject({ ...providersObject, [name]: { ...providersObject[name], focussed: false } })
     }
     const handleProviderChange = (name, text) => {
-        //  console.log(name, text);
-        setProvidersObject({ ...providersObject, [name]: { ...providersObject[name], value: parseInt(text) } })
+        (text.charCodeAt(0) > 47 && text.charCodeAt(0) < 58) ?
+            setProvidersObject({ ...providersObject, [name]: { ...providersObject[name], value: parseInt(text) } }) : text === '' ? setProvidersObject({ ...providersObject, [name]: { ...providersObject[name], value: text } }) : null
     }
 
     const handleSecondScreen = () => { setShowSecond(true) }
@@ -103,7 +99,7 @@ function StoreRankCalculator({ navigation }) {
         setShowFinal(true)
     }
     const handleFinalBack = () => {
-        console.log(adminsObject)
+        //  console.log(adminsObject)
         setShowSecond(true);
         setShowFinal(false);
     }
@@ -138,18 +134,6 @@ function StoreRankCalculator({ navigation }) {
         ],
         { cancelable: false }
     );
-    /*  const createBackAlert = () => Alert.alert(
-        "Are you sure??",
-        "You are about to go back!",
-        [
-          {
-            text: "Cancel",
-            style: "cancel"
-          },
-          { text: "OK", onPress: handleSecondBack }
-        ],
-        { cancelable: false }
-      );  */
     return (<Fragment>
         <View style={{ flexDirection: 'row', marginTop: 25 }}>
             <View style={{ width: '15%', marginTop: 9 }}>

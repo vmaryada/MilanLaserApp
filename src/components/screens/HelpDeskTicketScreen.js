@@ -81,7 +81,7 @@ function HelpDeskTicketScreen({ route, navigation }) {
 
     useEffect(() => {
         //      console.log('use effect ran')
-        console.log('params',route.params);
+       // console.log('params',route.params);
         //   route.params !== undefined ? route.params.uri !== undefined ? setAttachedImages([...attachedImages, route.params.uri]) : route.params.file !== undefined? setAttachedFiles([...attachedFiles, {uri: route.params.file.uri, name: route.params.file.name}]) :null : null
         (route.params !== undefined && route.params.image !== undefined && route.params.image.uri !== deletedImage) ? (attachedImages.includes(route.params.image.uri)) ? null : setAttachedImages([...attachedImages, route.params.image.uri]) : null;
         (route.params !== undefined && route.params.file !== undefined && route.params.file.uri !== deletedFile.uri) ? (attachedFiles.some(e => e.uri === route.params.file.uri)) ? null : setAttachedFiles([...attachedFiles, { uri: route.params.file.uri, name: route.params.file.name }]) : null;
@@ -221,7 +221,7 @@ function HelpDeskTicketScreen({ route, navigation }) {
             else if (attachedFiles.length > 0) {
                 attachedFiles.map((file) => { ticketFormData.append('attachments', { uri: file.uri, name: file.name }) })
             }
-            console.log(ticketFormData);
+           // console.log(ticketFormData);
             axios({
                 headers: { "Content-Type": "multipart/form-data" },
                 method: "post",
@@ -234,7 +234,7 @@ function HelpDeskTicketScreen({ route, navigation }) {
             }).then(res => {//console.log(res.data.choices);
                 setLoading(false);
                 setSuccessScreen(true);
-                console.log('ticket Created')
+               // console.log('ticket Created')
             })
                 .catch(err => { console.log('error', JSON.stringify(err)) })
         }
@@ -242,20 +242,20 @@ function HelpDeskTicketScreen({ route, navigation }) {
     }
 
     const handleImageDelete = (index) => {
-        console.log('image delete')
+       // console.log('image delete')
         var tempImageArray = attachedImages;
         setDeletedImage(attachedImages[index]);
         tempImageArray.splice(index, 1);
-        console.log(tempImageArray);
+      //  console.log(tempImageArray);
         setAttachedImages(tempImageArray);
         setExa(exa + 1);
     }
     const handleFileDelete = (index) => {
-        console.log('file delete')
+      //  console.log('file delete')
         var tempFileArray = attachedFiles;
         setDeletedFile(attachedFiles[index]);
         tempFileArray.splice(index, 1);
-        console.log(tempFileArray);
+      //  console.log(tempFileArray);
         setAttachedFiles(tempFileArray);
         setExa(exa + 1);
     }

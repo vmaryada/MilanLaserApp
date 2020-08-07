@@ -7,12 +7,13 @@ import Loading from '../components/util/Loading';
 //import auth from '@react-native-firebase/auth';
 import * as firebase from 'firebase';
 //import console = require('console');
+//import console = require('console');
 function Routes() {
-    const { user, setUser, clearErrors } = useContext(AuthContext);
+    const { user, setUser, clearErrors, authenticated } = useContext(AuthContext);
     const [loading, setLoading] = useState(true);
     const [initializing, setInitializing] = useState(true);
 
-    const onAuthStateChanged = (user) => {
+   /* const onAuthStateChanged = (user) => {
       //  console.log(user);
         setUser(user);
         clearErrors();
@@ -21,17 +22,18 @@ function Routes() {
     }
 
     useEffect(() => {
+        console.log('use Efect in ROutes.js');
        const subscriber = firebase.auth().onAuthStateChanged(onAuthStateChanged);
-        return subscriber; // unsubscribe on unmount
+        return subscriber; 
     }, []); 
 
     if (loading) {
         return <Loading />;
-    }
+    } */
 
     return (
         <NavigationContainer>
-           {user ? <HomeStack /> : <AuthStack />} 
+           {authenticated ? <HomeStack /> : <AuthStack />} 
 
         </NavigationContainer>
     );

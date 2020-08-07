@@ -118,7 +118,7 @@ function StoreRankCalculator({ navigation }) {
                         onFocus={() => { setSoldPercent({ ...soldPercent, focussed: true }) }}
                         onBlur={() => { setSoldPercent({ ...soldPercent, focussed: false }) }}
                         onChangeText={(text) => { setSoldPercent({ ...soldPercent, value: text }) }}
-                        value={soldPercent.value} /></View>
+                        value={currencyFormat0(soldPercent.value)} maxLength={3}/></View>
                     <View style={{ width: '15%', marginTop: 15, alignItems: 'center' }}>
                         {(soldPercent.focussed || soldPercent.value !== '') ? <Text style={{ fontSize: 30, color: '#01718f' }}>%</Text> : null}</View></View>
 

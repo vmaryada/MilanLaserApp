@@ -21,7 +21,7 @@ function QuoteCalculatorSecondScreen({ route, navigation }) {
   const [printSuccess, setPrintSuccess] = useState(false);
   // const screenWidth = Dimensions.get('window').width;
   // const respFontSize = Math.round(0.02*screenWidth);
-  // console.log(respFontSize);
+  
   const [reliefBonus, setReliefBonus] = useState(0);
   let privateSale = 0;
   //const constant = 1;
@@ -43,7 +43,7 @@ function QuoteCalculatorSecondScreen({ route, navigation }) {
   useEffect(() => {
     setOptions(route.params.options);
     var tempBodyAreasArray = [];
-    console.log('use Effect ran')
+   // console.log('use Effect ran')
     const snapshot = db.collection('bodyAreas')
     snapshot.get().then(querySnapshot => {
       querySnapshot.docs.map((doc) => {
@@ -104,13 +104,13 @@ function QuoteCalculatorSecondScreen({ route, navigation }) {
     { value: 0.0075, label: 'Colorado Springs' }, { value: 0.005, label: 'Denver East' }];
   //const areaButtonClick = (id) => { console.log(id) }
   const addArea = (id) => {
-    console.log(id)
+  //  console.log(id)
     // console.log(bodyAreasArray);
     var result = bodyAreasArray.find(obj => obj.id === id);
     // console.log(result);
-    if (state.value === 'option1') { setAreas1([...areas1, { id, name: result.name, price: result.price }]) }
-    else if (state.value === 'option2') { setAreas2([...areas2, { id, name: result.name, price: result.price }]) }
-    else if (state.value === 'option3') { setAreas3([...areas3, { id, name: result.name, price: result.price }]) }
+    if (state.value === 'option1') { setAreas1([...areas1, { id, name: (result.name === 'Female Chest' ||result.name ===  'Male Chest') ? 'Chest':result.name, price: result.price }]) }
+    else if (state.value === 'option2') { setAreas2([...areas2, { id, name: (result.name === 'Female Chest' ||result.name ===  'Male Chest') ? 'Chest':result.name, price: result.price }]) }
+    else if (state.value === 'option3') { setAreas3([...areas3, { id, name: (result.name === 'Female Chest' ||result.name ===  'Male Chest') ? 'Chest':result.name, price: result.price }]) }
 
   }
   const addFullBody = (id) => {
@@ -138,19 +138,19 @@ function QuoteCalculatorSecondScreen({ route, navigation }) {
     var tempArray = areas1; tempArray = tempArray.filter(area => area.id !== id);
     console.log(tempArray);
     setAreas1(tempArray);
-    console.log(id)
+  //  console.log(id)
 
   }
   const removeArea2 = (id) => {
     var tempArray = areas2; tempArray = tempArray.filter(area => area.id !== id);
     setAreas2(tempArray);
-    console.log(id)
+  //  console.log(id)
 
   }
   const removeArea3 = (id) => {
     var tempArray = areas3; tempArray = tempArray.filter(area => area.id !== id);
     setAreas3(tempArray);
-    console.log(id);
+  //  console.log(id);
 
   }
   const arraySum = (items, prop) => {
@@ -164,19 +164,19 @@ function QuoteCalculatorSecondScreen({ route, navigation }) {
       .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
 
   }
-  const currencyFormat2 = (amount) => {
+ /* const currencyFormat2 = (amount) => {
     return Number(amount)
       .toFixed(2)
       .replace(/\d(?=(\d{3})+\.)/g, '$&,');
   }
   const sendEQuote = () => {
     console.log('Email Function');
-  }
+  } */
   useEffect(() => {
-    console.log('Areas1 use Effect ran')
+  //  console.log('Areas1 use Effect ran')
     let obj = areas1.find(i => i.id === 'full_body');
-    console.log(discount);
-    console.log(obj);
+   // console.log(discount);
+   // console.log(obj);
     ((areas1.length > 1 || obj !== undefined)) && options.months === 36 ? setMonths1(36) : setMonths1(24);
     (obj !== undefined) ? (discount === 0.6 || discount === 0.7) ? setDiscount1(0.5) : setDiscount1(discount) : setDiscount1(discount)
   }, [areas1])
@@ -249,15 +249,15 @@ function QuoteCalculatorSecondScreen({ route, navigation }) {
   }
 
   const handleEmailSender = () => {
-    console.log(emailObject);
-    console.log('handle EMail Func');
+    //console.log(emailObject);
+    //console.log('handle EMail Func');
     if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
       setEmailError(false)
     }
     else { setEmailError(true) }
     if (subject === '') { setSubjectError(true) } else { setSubjectError(false) }
     if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email) && subject !== '') {
-      console.log('ready to go');
+     // console.log('ready to go');
       axios.post('https://milanlaser.com/quote/april2020/send_email.php', emailObject, {
         headers: {
           'X-Requested-With': 'XMLHttpRequest',
@@ -321,7 +321,6 @@ function QuoteCalculatorSecondScreen({ route, navigation }) {
           <TouchableOpacity onPress={() => { toggleTabs('faceTab') }}><Text style={{ fontSize: 17 }}>+ Face/Neck</Text></TouchableOpacity>
         </View>
         <ViewWithHide style={{ marginHorizontal: 65, marginVertical: 0, flexDirection: 'row', flexWrap: 'wrap' }} hide={tabs.faceTab}>
-
           <AreaButton title="Upper Lip" id="upper_lip" onPress={addArea} disabled={checkDisabled('upper_lip')} />
           <AreaButton title="Chin" id="chin" onPress={addArea} disabled={checkDisabled('chin')} />
           <AreaButton title="Neck" id="neck" onPress={addArea} disabled={checkDisabled('neck')} />
@@ -394,7 +393,9 @@ function QuoteCalculatorSecondScreen({ route, navigation }) {
           <AreaButton title="Forearms to Full Arms" id="up_full_arms" onPress={addArea} disabled={checkDisabled('up_full_arms')} />
           <AreaButton title="Half Back to Full Back" id="up_full_back" onPress={addArea} disabled={checkDisabled('up_full_back')} />
           <AreaButton title="Front/Back to Full T-Shirt" id="up_full_t" onPress={addArea} disabled={checkDisabled('up_full_t')} />
-          <AreaButton title="Front/Back to Full T-Shirt" id="up_chestnab" onPress={addArea} disabled={checkDisabled('up_chestnab')} />
+          <AreaButton title="Abdomen to Chest & Abdomen" id="up_chestnab" onPress={addArea} disabled={checkDisabled('up_chestnab')} />
+          <AreaButton title="Lip to Full Face & Neck" id="up_lip_full_face" onPress={addArea} disabled={checkDisabled('up_lip_full_face')} />
+          <AreaButton title="Chin to Full Face & Neck" id="up_chin_full_face" onPress={addArea} disabled={checkDisabled('up_chin_full_face')} />
         </ViewWithHide>
         <Divider />
         <View style={{ alignItems: 'flex-end' }}>

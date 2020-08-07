@@ -38,7 +38,7 @@ function LoginScreen({ navigation }) {
 
     if (tempEmailError === '' && tempPasswordError === '') { login(email, password) }
     else {
-      console.log('else nadustundi')
+      console.log('else')
     }
   }
   return (

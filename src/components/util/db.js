@@ -11,7 +11,7 @@ const firebaseConfig = {
     measurementId: "G-8YMSQLT4NH"
   }
 //import console = require('console');
-console.log(firebaseConfig);
+//console.log(firebaseConfig);
 firebase.initializeApp(firebaseConfig);
 export const db = firebase.firestore();
 

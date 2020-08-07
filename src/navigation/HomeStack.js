@@ -14,6 +14,9 @@ import LeadScreen from '../components/screens/LeadScreen.js';
 import DocumentPicker from '../components/screens/DocumentPicker.js';
 import HelpDeskTicketScreen from '../components/screens/HelpDeskTicketScreen.js';
 import PrintSuccess from '../components/screens/PrintSuccess.js';
+import Browser from '../components/screens/Browser.js';
+import Browser1 from '../components/screens/Browser1.js';
+//import LoginScreenSalesforce from '../components/screens/LoginPasscode.js';
 const Stack = createStackNavigator();
 const ChatAppStack = createStackNavigator();
 const ModalStack = createStackNavigator();
@@ -24,10 +27,7 @@ export default function HomeStack() {
   const {logout} = useContext(AuthContext); 
   return (
     <ModalStack.Navigator mode='modal' >
-      <ModalStack.Screen name='Home' component={HomeScreen} options={({navigation}) => ({
-       headerRight: () => (<IconButton icon='logout' size={28} 
-       onPress={()=>{logout()}}/>)
-    })}/>
+      <ModalStack.Screen name='Home' component={HomeScreen} options={{headerShown:false}}/>
       <ModalStack.Screen name='QuoteCalculator' options={{headerShown: false}} component={QuoteCalculator} />
       <ModalStack.Screen name='CommissionCalculator' options={{headerShown: false}} component={CommissionCalculator} />
       <ModalStack.Screen options={{headerShown: false}} name='StoreRankCalculator' component={StoreRankCalculator} />
@@ -38,6 +38,9 @@ export default function HomeStack() {
       <ModalStack.Screen options={{headerShown: false}} name='ImagePickerScreen' component={ImagePickerScreen}/>
       <ModalStack.Screen options={{headerShown: false}} name='DocumentPicker' component={DocumentPicker}/>
       <ModalStack.Screen options={{headerShown: false}} name='PrintSuccess' component={PrintSuccess}/>
+      <ModalStack.Screen options={{headerShown: false}} name='Browser' component={Browser}/>
+      <ModalStack.Screen options={{headerShown: false}} name='Browser1' component={Browser1}/>
+     {/*} <ModalStack.Screen options={{headerShown: false}} name='LoginScreenSalesforce' component={LoginScreenSalesforce}/> */}
     </ModalStack.Navigator>
   );
 }

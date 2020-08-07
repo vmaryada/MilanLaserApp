@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>652981090258-4picefn9quo96lrkr0asc038bhnc51gd.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.652981090258-4picefn9quo96lrkr0asc038bhnc51gd</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAT3WiWwDIePiE6M0m4DB9MWWNrxwOyl5o</string>
+	<key>GCM_SENDER_ID</key>
+	<string>652981090258</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.milanlaser.milanLaserApp</string>
+	<key>PROJECT_ID</key>
+	<string>milanlaser-fcb24</string>
+	<key>STORAGE_BUCKET</key>
+	<string>milanlaser-fcb24.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:652981090258:ios:8d5467262b0f8e3594ba0b</string>
+	<key>DATABASE_URL</key>
+	<string>https://milanlaser-fcb24.firebaseio.com</string>
+</dict>
+</plist>
