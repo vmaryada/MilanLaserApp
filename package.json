@@ -31,7 +31,7 @@
     "forceios": "^8.2.0",
     "forcereact": "^8.2.0",
     "nodeify": "^1.0.1",
-    "qs": "^6.9.4",
+    "qs": "^6.9.7",
     "react": "~16.9.0",
     "react-dom": "~16.9.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-37.0.1.tar.gz",
